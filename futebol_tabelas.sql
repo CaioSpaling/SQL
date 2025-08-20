@@ -1,0 +1,39 @@
+CREATE TABLE Clube (
+    clube_id SERIAL PRIMARY KEY,
+    nome VARCHAR(20) UNIQUE NOT NULL,
+    tecnico VARCHAR(15) NOT NULL,
+    estadio VARCHAR(35) NOT NULL,
+    regiao VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Jogador (
+    jogador_id SERIAL PRIMARY KEY,
+    nome VARCHAR(30) NOT NULL,
+    idade INT NOT NULL,
+    regiao VARCHAR(20) NOT NULL,
+    clube_id INT REFERENCES Clube(clube_id)
+);
+
+CREATE TABLE Artilharia (
+    artilharia_id SERIAL PRIMARY KEY,
+    gols INT NOT NULL,
+    assistencias INT NOT NULL,
+    maior_vitima VARCHAR(20) NOT NULL, 
+    jogador_id INT REFERENCES Jogador(jogador_id)
+);
+
+CREATE TABLE Campeonatos (
+    campeonato_id SERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    campeao VARCHAR(20) NOT NULL, 
+    rebaixado VARCHAR(20) NOT NULL,
+    clube_id INT REFERENCES Clube(clube_id)
+);
+
+CREATE TABLE Regiao (
+    regiao_id SERIAL PRIMARY KEY,
+    nome VARCHAR(20) NOT NULL,
+    jogador_id INT REFERENCES Jogador(jogador_id),
+    campeonato_id INT REFERENCES Campeonatos(campeonato_id),
+    clube_id INT REFERENCES Clube(clube_id) 
+);
