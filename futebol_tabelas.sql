@@ -1,7 +1,7 @@
 CREATE TABLE Clube (
     clube_id SERIAL PRIMARY KEY,
     nome VARCHAR(20) UNIQUE NOT NULL,
-    tecnico VARCHAR(15) NOT NULL,
+    tecnico VARCHAR(25) NOT NULL,
     estadio VARCHAR(35) NOT NULL,
     regiao VARCHAR(20) NOT NULL
 );
@@ -27,7 +27,7 @@ CREATE TABLE Campeonatos (
     nome VARCHAR(50) NOT NULL,
     campeao VARCHAR(20) NOT NULL, 
     rebaixado VARCHAR(20) NOT NULL,
-    clube_id INT REFERENCES Clube(clube_id)
+    artilharia_id INT REFERENCES Artilharia(artilharia_id)
 );
 
 CREATE TABLE Regiao (
@@ -37,3 +37,4 @@ CREATE TABLE Regiao (
     campeonato_id INT REFERENCES Campeonatos(campeonato_id),
     clube_id INT REFERENCES Clube(clube_id) 
 );
+
