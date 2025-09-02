@@ -1,0 +1,13 @@
+/* Mostra todas as informações dos clubes */
+SELECT * FROM Clube;
+
+/* Mostra o jogador e suas caracteristicas */
+SELECT j.jogador_id, j.nome, c.nome, j.idade, j.regiao
+FROM Jogador AS j
+INNER JOIN Clube AS c ON c.clube_id = j.clube_id;
+
+/* Mostra os artilheiros de cada campeonato */
+SELECT cam.nome AS campeonato, j.nome AS artilheiro, a.gols
+FROM Campeonatos cam
+INNER JOIN Artilharia AS a ON cam.artilharia_id = a.artilharia_id
+INNER JOIN Jogador AS j ON a.jogador_id = j.jogador_id;
