@@ -1,0 +1,44 @@
+SELECT nome, cpf, email FROM hospedes;
+
+SELECT
+    tipo, andar, valor_diaria
+FROM quartos
+WHERE disponivel = TRUE;
+
+
+SELECT 
+    h.nome, q.tipo, q.andar, r.data_checkin, r.data_checkout
+FROM reservas AS r
+JOIN hospedes AS h ON h.cpf = r.cpf_hospede
+JOIN quartos AS q ON q.quarto_id = r.quarto_id
+WHERE
+    r.data_checkin
+    BETWEEN '2025-09-02' AND '2025-09-05';
+
+
+SELECT 
+    reserva_id, total_reserva, total_consumos, 
+    total_servicos, percentual_descontos
+FROM
+    reservas
+ORDER BY
+    total_reserva DESC;
+
+SELECT 
+    p.descricao, SUM(cp.quantidade) AS qtde_total
+FROM produtos as p
+JOIN consumo_produtos AS cp ON cp.produto_id = p.produto_id
+GROUP BY p.descricao
+ORDER BY qtde_total DESC;
+
+SELECT 
+    h.nome, h.cpf, (r.total_reserva + r.total_consumos + r.total_servicos) AS total
+FROM reservas AS r
+JOIN hospedes AS h ON h.cpf = r.cpf_hospede
+ORDER BY total DESC;
+
+SELECT h.nome, h.cpf, r.data_checkin, r.data_checkout, r.status
+FROM reservas AS r
+JOIN hospedes AS h ON h.cpf = r.cpf_hospede
+WHERE
+    r.status = 'Pendente';
